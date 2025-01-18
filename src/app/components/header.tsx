@@ -1,27 +1,59 @@
+"use client"
+import React from "react";
+import { useState } from "react";
 import Link from "next/link";
 
-export default function Header() {
-  return (
-    <div className="w-full h-full flex flex-col sm:flex-row justify-center sm:justify-between items-center bg-blue-100">
+export function NavBar() {
+  const [isOpen, SetIsOpen] = useState(false);
 
-      <div className="text-2xl sm:text-3xl mt-5 sm:ml-20 sm:mt-5 sm:mb-5 text-blue-400 font-bold">
-        <h1>Beelog</h1>
+  return (
+    <div className="flex flex-col sm:flex-row justify-between items-center p-4 container mx-auto px-4 ">
+      {/* Hamburger Button */}
+      <button
+        className="block sm:hidden   ml-auto p-2"
+        onClick={() => SetIsOpen(!isOpen)}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d={
+              isOpen
+                ? "M6 18L18 6M6 6l12 12" // Close icon
+                : "M4 6h16M4 12h16M4 18h16" // Hamburger icon
+            }
+          />
+        </svg>
+      </button>
+
+      {/* Navbar Title */}
+      <div className="text-2xl sm:text-3xl text-orange-700 font-bold m-3 sm:ml-20 italic text-center sm:text-left">
+        Portfolio
       </div>
 
-
-      <div className="w-full">
-        <ul className="flex flex-col sm:flex-row justify-center items-center text-blue-600 gap-4 sm:gap-7 lg:gap-10 sm:ml-22 mt-5 sm:mt-0 sm:mb-0">
-          <Link href="/" className="hover:text-blue-300">
-            <li className="text-xl sm:text-lg px-4 py-2">Home</li>
+      {/* Links */}
+      <div
+        className={`${isOpen ? "block" : "hidden"} sm:block transition-all duration-300 ease-in-out`}
+      >
+        <ul className="flex flex-col sm:flex-row justify-center items-center text-lg sm:text-xl sm:mr-20 gap-4 sm:gap-6 text-gray-500">
+          <Link href="./">
+            <li className="hover:text-orange-500">Home</li>
           </Link>
-          <Link href="/about" className="hover:text-blue-300">
-            <li className="text-xl sm:text-lg px-4 py-2">About</li>
+          <Link href="./about">
+            <li className="hover:text-orange-500">About</li>
           </Link>
-          <Link href="/blogs" className="hover:text-blue-300">
-            <li className="text-xl sm:text-lg px-4 py-2">Blogs</li>
+          <Link href="projects">
+            <li className="hover:text-orange-500">Projects</li>
           </Link>
-          <Link href="/contact" className="hover:text-blue-300">
-            <li className="text-xl sm:text-lg px-4 py-2">Contact</li>
+          <Link href="contact">
+            <li className="hover:text-orange-500">Contact</li>
           </Link>
         </ul>
       </div>
